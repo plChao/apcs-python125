@@ -1,0 +1,168 @@
+{
+  "id": "bangye-python125",
+  "title": "APCS Python 程式識讀 125 題",
+  "source": {
+    "name": "bangye",
+    "author": "吳邦一",
+    "url": "https://www.facebook.com/groups/359446638362710/user/631493240/",
+    "document": "python_bangye_v2.pdf (08/25/2025 修正版)"
+  },
+  "questions": [
+    {
+      "id": "bangye-001",
+      "sourceRef": "Q.001",
+      "tags": ["變數與基本運算", "整數除法", "運算優先順序"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 5\nb = 3+a*2-a//2\na = a+b\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["15.5 10.5", "16 11", "10 5", "10.5 5.5", "執行錯誤"],
+      "answer": "B",
+      "explanation": [
+        { "type": "text", "text": "整數除法、先乘除後加減。" }
+      ]
+    },
+    {
+      "id": "bangye-002",
+      "sourceRef": "Q.002",
+      "tags": ["變數與基本運算", "運算優先順序"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = (5+2)*(7-2*3)\nb = (a-4*(a-5))*2\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["7 -2", "105 -325", "51 -9", "0 0", "執行錯誤"],
+      "answer": "A",
+      "explanation": [
+        { "type": "text", "text": "括弧先算、先乘除後加減。" }
+      ]
+    },
+    {
+      "id": "bangye-003",
+      "sourceRef": "Q.003",
+      "tags": ["變數與基本運算", "指定運算", "執行錯誤"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 5\nb = a+3 = 7\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["5 7", "4 7", "4 8", "5 8", "執行錯誤"],
+      "answer": "E",
+      "explanation": [
+        { "type": "text", "text": "指定運算(=)左方必須為變數。" }
+      ]
+    },
+    {
+      "id": "bangye-004",
+      "sourceRef": "Q.004",
+      "tags": ["queue", "list", "函式"],
+      "difficulty": "中",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "q = []\nhead = 0\ndef push(q,c):\n    ___x___\n#\ndef pop(q):\n    c = q[head]\n    ___y___\n    return c\n#" },
+        { "type": "text", "text": "此程式中 q 是用來當作一個先進先出的佇列(queue)。push 與 pop 兩函數中所缺的指令 x 與 y 應填入下列何者？" }
+      ],
+      "options": [
+        "x: q[head]=c; y: head += 1",
+        "x: q.append(c); y: head += 1",
+        "x: q[head]=c; y: head -= 1",
+        "x: q.append(c); y: head -= 1",
+        "以上皆非"
+      ],
+      "answer": "B",
+      "explanation": [
+        { "type": "text", "text": "queue 的基本題，簡易的 queue，head 為彈出的位置，list 的尾端直接當作 queue 的尾端。" }
+      ]
+    },
+    {
+      "id": "bangye-005",
+      "sourceRef": "Q.005",
+      "tags": ["變數與基本運算", "循序執行", "整數除法"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 2\na = 3.5\nb = 3//5*5\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["2 3", "3.5 3", "2 0", "3.5 0", "執行錯誤"],
+      "answer": "D",
+      "explanation": [
+        { "type": "text", "text": "指令先後順序，變數無型態限制，所以 a=3.5。b 的計算同是乘除，由左往右，整數除法無小數，b=0。" }
+      ]
+    },
+    {
+      "id": "bangye-006",
+      "sourceRef": "Q.006",
+      "tags": ["變數與基本運算", "整數除法", "餘數"],
+      "difficulty": "中",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 13%5\nb = -13%5\nc = -13//5\nprint(a,b,c)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["3 -3 -3", "3 2 -3", "3 -3 -2", "3 2 -2", "執行錯誤"],
+      "answer": "B",
+      "explanation": [
+        { "type": "text", "text": "負號優先結合，題目中等同 b=(-13)%5 與 c=(-13)//5。求整數除法商取 rounding down(捨位到比較小的整數)；餘數運算時，滿足 被除數=商*除數+餘數，所以負數除以正數取餘數時，餘數落於 [0, 除數-1] 之間。" }
+      ]
+    },
+    {
+      "id": "bangye-007",
+      "sourceRef": "Q.007",
+      "tags": ["指定運算", "多變數指定"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 5\nb = 3\na,b = b-1,a-1\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["2 1", "3 4", "2 4", "不一定", "執行錯誤"],
+      "answer": "C",
+      "explanation": [
+        { "type": "text", "text": "先取值計算右邊，再指定給左邊。" }
+      ]
+    },
+    {
+      "id": "bangye-008",
+      "sourceRef": "Q.008",
+      "tags": ["queue", "list", "迴圈"],
+      "difficulty": "難",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "s = [1,1,-3,2,4,-1,2,3,-5,2,-1,1]\nq = []\nh = 0\nfor v in s:\n    if v > 0:\n        q.append(v)\n    else:\n        while v < 0 and h<len(q):\n            v += q[h]; h += 1\nprint(sum(q[h:]))" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["1", "3", "4", "6", "以上皆非或執行錯誤"],
+      "answer": "B",
+      "explanation": [
+        { "type": "text", "text": "用理解或直接追蹤皆可。q 是 queue，碰到正數壓入，負數則一直彈出抵銷，直到 q 是空或抵消完畢。問最後剩下 queue 中的總和。在測資中，-3 消掉前面，-1 消掉 2，-5 消 (4,2)，-1 消 3，最後 queue 中剩下 (2,1)。" }
+      ]
+    },
+    {
+      "id": "bangye-009",
+      "sourceRef": "Q.009",
+      "tags": ["queue", "字串"],
+      "difficulty": "中",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "q = []\nh = 0\ns = ''\nfor v in [3,12,-2,765,23,-1,-3]:\n    if v > 0: q.append(str(v))\n    else:\n        s += q[h]\n        h += 1\n#\nprint(s)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["312765", "780", "31276523", "1223765", "以上皆非或執行錯誤"],
+      "answer": "A",
+      "explanation": [
+        { "type": "text", "text": "q 是 queue，正數壓入字串，否則從 q 中彈出串接到 s。" }
+      ]
+    },
+    {
+      "id": "bangye-010",
+      "sourceRef": "Q.010",
+      "tags": ["布林", "常見錯誤", "執行錯誤"],
+      "difficulty": "易",
+      "stem": [
+        { "type": "code", "lang": "python", "code": "a = 1 < 2\nb += a\nprint(a,b)" },
+        { "type": "text", "text": "輸出為何？" }
+      ],
+      "options": ["True 1", "1 1", "0 0", "不一定", "執行錯誤"],
+      "answer": "E",
+      "explanation": [
+        { "type": "text", "text": "b += 左方必須有定義。" }
+      ]
+    }
+  ]
+}

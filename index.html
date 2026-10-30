@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>選擇題練習</title>
+  <meta name="theme-color" content="#2f6b3a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="選擇題練習">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button id="btnHome" class="topbar-title" type="button">選擇題練習</button>
+    <span id="progressLabel" class="topbar-progress"></span>
+  </header>
+
+  <main id="app">
+    <!-- 首頁：選題庫與 tag -->
+    <section id="viewHome" class="view">
+      <div class="card">
+        <h2>題庫</h2>
+        <div id="bankList" class="chip-group"></div>
+      </div>
+      <div class="card">
+        <div class="row-between">
+          <h2>標籤</h2>
+          <button id="btnClearTags" class="link-btn" type="button">清除</button>
+        </div>
+        <p class="hint">不選 = 全部題目；選多個 = 含有任一標籤的題目。</p>
+        <div id="tagList" class="chip-group"></div>
+      </div>
+      <div class="card">
+        <h2>難度</h2>
+        <div id="difficultyList" class="chip-group"></div>
+      </div>
+      <div class="card">
+        <label class="check-row">抽
+          <input type="number" id="inputCount" class="count-input" min="1" value="10" inputmode="numeric" placeholder="全部">
+          題(空白 = 全部)</label>
+        <label class="check-row"><input type="checkbox" id="chkShuffle"> 打亂題目順序</label>
+        <label class="check-row"><input type="checkbox" id="chkShuffleOptions"> 打亂選項順序(「以上皆是 / 以上皆非」固定不動)</label>
+        <label class="check-row"><input type="checkbox" id="chkWrongOnly"> 只練之前答錯的題目</label>
+      </div>
+      <div class="start-bar">
+        <span id="matchCount" class="hint"></span>
+        <button id="btnStart" class="primary-btn" type="button">開始練習</button>
+      </div>
+    </section>
+
+    <!-- 作答 -->
+    <section id="viewQuiz" class="view" hidden>
+      <article class="card question">
+        <div class="q-meta">
+          <span id="qNumber" class="q-number"></span>
+          <span id="qDifficulty" class="badge"></span>
+          <span id="qTags" class="q-tags"></span>
+        </div>
+        <div id="qStem" class="q-stem"></div>
+        <ol id="qOptions" class="q-options"></ol>
+        <div id="qResult" class="q-result" hidden>
+          <p id="qVerdict" class="verdict"></p>
+          <div id="qExplanation" class="q-explanation"></div>
+          <p id="qSource" class="q-source"></p>
+        </div>
+      </article>
+      <nav class="quiz-nav">
+        <button id="btnPrev" class="ghost-btn" type="button">上一題</button>
+        <button id="btnNext" class="primary-btn" type="button">下一題</button>
+      </nav>
+    </section>
+
+    <!-- 練習進度 -->
+    <section id="viewProgress" class="view" hidden>
+      <div class="card">
+        <h2>整體進度</h2>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-label">做過</span>
+            <span id="statDone" class="stat-value"></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">✓ 答對</span>
+            <span id="statCorrect" class="stat-value"></span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">✗ 答錯</span>
+            <span id="statWrong" class="stat-value"></span>
+          </div>
+        </div>
+        <div id="progressBar" class="progress-bar" role="img"></div>
+        <ul id="progressLegend" class="progress-legend"></ul>
+        <p class="hint">以每題「最近一次」的作答結果計算；答對、答錯的比例以做過的題目為分母。</p>
+      </div>
+
+      <div class="card">
+        <div class="row-between">
+          <h2>常錯題目</h2>
+          <button id="btnPracticeFrequent" class="link-btn" type="button">全部練一次</button>
+        </div>
+        <p class="hint">答錯過的題目，依答錯次數排序。點題目可以單獨重做。</p>
+        <ul id="frequentList" class="frequent-list"></ul>
+      </div>
+
+      <div class="card">
+        <h2>各標籤答對率</h2>
+        <p class="hint">只計算做過的題目，答對率低的排前面。</p>
+        <ul id="tagStatList" class="tag-stat-list"></ul>
+      </div>
+
+      <button id="btnResetRecord" class="ghost-btn danger-btn" type="button">清除所有作答紀錄</button>
+    </section>
+
+    <!-- 結果 -->
+    <section id="viewSummary" class="view" hidden>
+      <div class="card summary">
+        <h2>練習結果</h2>
+        <p id="summaryScore" class="summary-score"></p>
+        <ul id="summaryList" class="summary-list"></ul>
+      </div>
+      <nav class="quiz-nav">
+        <button id="btnRetryWrong" class="ghost-btn" type="button">重練答錯的</button>
+        <button id="btnBackHome" class="primary-btn" type="button">回首頁</button>
+      </nav>
+    </section>
+  </main>
+
+  <nav class="tabs" role="tablist">
+    <button id="tabPractice" class="tab" type="button" role="tab" data-view="viewHome">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></svg>
+      <span>練習</span>
+    </button>
+    <button id="tabProgress" class="tab" type="button" role="tab" data-view="viewProgress">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"/><path d="M7 16v-5M12 16V6M17 16v-8"/></svg>
+      <span>練習進度</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>
