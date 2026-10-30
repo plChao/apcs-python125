@@ -294,17 +294,11 @@ function renderQuestion() {
   const chosen = session.answers[q.id];
 
   $('progressLabel').textContent = `${session.index + 1} / ${session.ids.length}`;
-  $('qNumber').textContent = `${q.source?.name ? q.source.name + ' ' : ''}${q.sourceRef || q.id}`;
+  $('qNumber').textContent = q.sourceRef || q.id;
   $('qDifficulty').textContent = q.difficulty || '';
   $('qDifficulty').hidden = !q.difficulty;
 
-  const tags = $('qTags');
-  tags.replaceChildren();
-  for (const tag of q.tags || []) {
-    const span = document.createElement('span');
-    span.textContent = tag;
-    tags.appendChild(span);
-  }
+  renderSource(q);
 
   const stem = $('qStem');
   stem.replaceChildren();
@@ -359,6 +353,26 @@ function renderOptionText(text, container) {
   }
 }
 
+// 題目上方顯示出處，有網址就可以點去原始出處
+function renderSource(q) {
+  const source = $('qSource');
+  source.replaceChildren();
+  source.hidden = !q.source;
+  if (!q.source) return;
+  source.append('來源：');
+  const label = [q.source.name, q.source.author && `(${q.source.author})`, q.sourceRef].filter(Boolean).join(' ');
+  if (q.source.url) {
+    const a = document.createElement('a');
+    a.href = q.source.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.textContent = `${label} ↗`;
+    source.appendChild(a);
+  } else {
+    source.append(label);
+  }
+}
+
 function answerQuestion(q, key) {
   if (state.session.answers[q.id]) return;
   state.session.answers[q.id] = key;
@@ -391,23 +405,6 @@ function showResult(q, chosen) {
   const explanation = $('qExplanation');
   explanation.replaceChildren();
   renderBlocks(q.explanation, explanation);
-
-  const source = $('qSource');
-  source.replaceChildren();
-  if (q.source) {
-    source.append('來源：');
-    const label = [q.source.name, q.source.author && `(${q.source.author})`, q.sourceRef].filter(Boolean).join(' ');
-    if (q.source.url) {
-      const a = document.createElement('a');
-      a.href = q.source.url;
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.textContent = label;
-      source.appendChild(a);
-    } else {
-      source.append(label);
-    }
-  }
 
   $('qResult').hidden = false;
 }

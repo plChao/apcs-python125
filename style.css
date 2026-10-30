@@ -192,9 +192,6 @@ main {
   background: var(--accent-soft);
   color: var(--accent);
 }
-.q-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.q-tags span { font-size: .78rem; color: var(--muted); }
-.q-tags span::before { content: "#"; }
 
 .q-stem p, .q-explanation p { margin: 8px 0; white-space: pre-wrap; }
 
@@ -242,8 +239,8 @@ figure.media figcaption { color: var(--muted); font-size: .85rem; }
 .verdict { font-weight: 700; margin: 0 0 4px; }
 .verdict.correct { color: var(--correct); }
 .verdict.wrong { color: var(--wrong); }
-.q-source { color: var(--muted); font-size: .82rem; margin: 10px 0 0; }
-.q-source a { color: inherit; }
+.q-source { color: var(--muted); font-size: .85rem; margin: -4px 0 8px; }
+.q-source a { color: var(--accent); }
 
 .quiz-nav { display: flex; justify-content: space-between; gap: 12px; }
 .quiz-nav button { flex: 1; }

@@ -1,7 +1,7 @@
 'use strict';
 
 // 改了 index.html / style.css / app.js 之後，把版本號加 1，手機才會換新版
-const CACHE_NAME = 'mcq-practice-v6';
+const CACHE_NAME = 'mcq-practice-v7';
 const APP_SHELL = [
   './',
   'index.html',

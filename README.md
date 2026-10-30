@@ -42,7 +42,7 @@ media/                          題目用的圖片(.jpg / .png / .svg)
   "source": {                       // 題庫預設來源，每題會自動帶入
     "name": "bangye",
     "author": "吳邦一",
-    "url": "https://www.facebook.com/groups/359446638362710/user/631493240/"
+    "url": "https://hackmd.io/@bangyewu/B13lefwMp"
   },
   "questions": [
     {
